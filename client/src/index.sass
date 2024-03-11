@@ -3,15 +3,34 @@ $primary-color: #182D55
 $secondary-color: #FFFFFF
 $accent: #6DE0FF
     
+// defaults
 *
     padding: 0px
     margin: 0px
     box-sizing: border-box
 
+h1,h2,h3,h4,h5,h6,p,div
+    padding: 0px
+    margin: 0px
+
+// common stylings
+.mybtn
+    padding: 5px 20px
+    border-radius: 10px
+    color: $accent
+    border: 1px solid $accent
+    background-color: transparent
+    transition: background-color 1s
+
+    &:hover
+        background-color: $accent
+        color: $primary-color
+
 
 .header
     background-color: $primary-color
     padding-block: 30px
+    border-bottom: 1px solid $secondary-color
 
     .header-wrapper
         display: flex
@@ -21,3 +40,26 @@ $accent: #6DE0FF
         a
             text-decoration: none
             color: $secondary-color
+
+
+.register,.login
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 90vh
+    color: $secondary-color
+    background-color: $primary-color
+    
+    .container
+        max-width: 700px
+        
+        .register-wrapper,.login-wrapper
+            border: 1px solid $secondary-color
+            padding: 80px 40px
+            border-radius: 20px
+            box-shadow: $secondary-color 0px 0px 6px 0px
+
+            input
+                background-color: transparent
+                color: $secondary-color
+                border: 1px solid $accent

@@ -9,7 +9,7 @@ const Header = () => {
             <Link to="/">Home</Link>
             <Link to="/create-recipies">Create Recipies</Link>
             <Link to="/saved-recipies">Saved Recipies</Link>
-            <Link to="/auth">SignIn/SignUp</Link>
+            <Link to="/auth">Login/Register</Link>
           </div>
         </div>
     </div>
