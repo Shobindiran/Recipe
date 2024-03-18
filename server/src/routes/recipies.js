@@ -32,7 +32,7 @@ router.put("/", async(req,res)=>{
     
     try{
         const recipe = await RecipeModel.findById(req.body.recipeID);
-        const user = await RecipeModel.findById(req.body.userID);
+        const user = await UserModel.findById(req.body.userID);
         user.savedRecipies.push(recipe);
         await user.save();
         res.json({savedRecipies: user.savedRecipies})
@@ -42,9 +42,9 @@ router.put("/", async(req,res)=>{
     }
 });
 
-router.get("/savedRecipies/ids", async(req,res)=>{
+router.get("/savedRecipies/ids/:userID", async(req,res)=>{
     try{
-        const user = await UserModel.findById(req.body.userID);
+        const user = await UserModel.findById(req.params.userID);
         res.json({savedRecipies:user.savedRecipies});
     }
     catch(err){
