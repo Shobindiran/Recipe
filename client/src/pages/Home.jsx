@@ -39,6 +39,8 @@ const Home = () => {
     }
   }
 
+  const isRecipeSaved = (id)=> savedRecipies.includes(id)
+
   return (
     <div className='recipies-wrapper'>
       <h1>Recipies</h1>
@@ -47,7 +49,9 @@ const Home = () => {
           <li key={recipe._id}> 
             <div>
               <h2>{recipe.name}</h2>
-              <button onClick={()=>saveRecipe(recipe._id)}>Save</button>
+              <button onClick={()=>saveRecipe(recipe._id)} disabled={isRecipeSaved(recipe._id)}>
+                {isRecipeSaved(recipe._id) ? "Saved" : "save"}
+              </button>
             </div>
 
             <div className="instructions">
