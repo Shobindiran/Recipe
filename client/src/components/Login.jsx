@@ -19,6 +19,7 @@ const Login = () => {
       const response = await axios.post("http://localhost:8000/auth/login",{username,password});
       setCookies("access_token",response.data.token);
       window.localStorage.setItem("userID",response.data.userID);
+      // console.log(response)
       navigate("/");
     }
     catch(err){

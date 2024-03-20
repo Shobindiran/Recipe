@@ -33,34 +33,44 @@ const Home = () => {
   const saveRecipe = async (recipeID)=>{
     try{
       const response = await axios.put("http://localhost:8000/recipies",{recipeID,userID});
-      console.log(recipeID,userID,response)
+      setSavedRecipies(response.data.savedRecipies)
     }catch(err){
       console.log(err);
     }
   }
 
   const isRecipeSaved = (id)=> savedRecipies.includes(id)
-
+  
+  // const isRecipeSaved = (id)=>{
+  //   console.log(id)
+  //   return false
+  // }
   return (
-    <div className='recipies-wrapper'>
-      <h1>Recipies</h1>
-      <ul>
-        {recipies.map((recipe)=>(
-          <li key={recipe._id}> 
-            <div>
-              <h2>{recipe.name}</h2>
-              <button onClick={()=>saveRecipe(recipe._id)} disabled={isRecipeSaved(recipe._id)}>
-                {isRecipeSaved(recipe._id) ? "Saved" : "save"}
-              </button>
-            </div>
+    <div className="recipies">
+      <div className="container">
+        <div className='recipies-wrapper'>
+          <h1>Recipies</h1>
+          <ul className='recipe-list'>
+            {recipies.map((recipe)=>(
+              <li key={recipe._id} className='recipe'> 
+                <div className='recipe-box'>
+                  <div className='recipe-header'>
+                    <h2>{recipe.name}</h2>
+                    <button className='mybtn' onClick={()=>saveRecipe(recipe._id)} disabled={isRecipeSaved(recipe._id)}>
+                      {isRecipeSaved(recipe._id) ? "Saved" : "save"}
+                    </button>
+                  </div>
 
-            <div className="instructions">
-              <p>{recipe.instructions}</p>
-            </div>
-            <img src={recipe.imageURL} alt={recipe.name}></img>
-          </li>
-        ))}
-      </ul>
+                  <div className="instructions">
+                    <p>{recipe.instructions}</p>
+                  </div>
+                  <img className="recipe-img" src={recipe.imageURL} alt={recipe.name}></img>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
