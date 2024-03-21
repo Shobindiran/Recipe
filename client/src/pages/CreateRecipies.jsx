@@ -2,9 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useGetUserID } from "../hooks/useGetUserID"
 import { useNavigate } from 'react-router-dom';
+import {useCookies} from "react-cookie";
 
 const CreateRecipies = () => {
   const userID = useGetUserID();
+  const [cookies,_] = useCookies(["access_token"])
   const [recipe,setRecipe] = useState({
     name: "",
     ingredients: [],
@@ -35,7 +37,8 @@ const CreateRecipies = () => {
     e.preventDefault();
 
     try{
-      axios.post("http://localhost:8000/recipies",recipe);
+      axios.post("http://localhost:8000/recipies",recipe,
+      {headers:{ authorization: cookies.access_token }});
       alert("recipe created");
       navigate("/")
     }

@@ -8,7 +8,7 @@ const Login = () => {
   const [username,setUsername] = useState("");
   const [password,setPassword] = useState("");
 
-  const [cookies,setCookies] = useCookies(["access_token"]);
+  const [_,setCookies] = useCookies(["access_token"]);
 
   const navigate = useNavigate();
 
@@ -19,7 +19,6 @@ const Login = () => {
       const response = await axios.post("http://localhost:8000/auth/login",{username,password});
       setCookies("access_token",response.data.token);
       window.localStorage.setItem("userID",response.data.userID);
-      // console.log(response)
       navigate("/");
     }
     catch(err){

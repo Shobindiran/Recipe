@@ -21,8 +21,12 @@ const Header = () => {
           <div className="header-wrapper">
             <Link to="/">Home</Link>
             <Link to="/create-recipies">Create Recipies</Link>
-            <Link to="/saved-recipies">Saved Recipies</Link>
-            {!cookies.access_token? (<Link to="/auth">Login/Register</Link>) : (<button onClick={logout}>Logout</button>) }
+            {!cookies.access_token? (<Link to="/auth">Login/Register</Link>) : (
+            <>
+              <Link to="/saved-recipies">Saved Recipies</Link>
+              <button onClick={logout}>Logout</button>
+            </>
+            ) }
             
           </div>
         </div>

@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose";
 import { RecipeModel } from "../models/Recipies.js";
 import { UserModel } from "../models/Users.js";
+import { verifyToken } from "./users.js";
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.get("/", async(req,res)=>{
     }
 });
 
-router.post("/", async(req,res)=>{
+router.post("/", verifyToken, async(req,res)=>{
 
     const recipe = new RecipeModel(req.body);
 
@@ -28,7 +29,7 @@ router.post("/", async(req,res)=>{
     }
 });
 
-router.put("/", async(req,res)=>{
+router.put("/", verifyToken, async(req,res)=>{
     
     try{
         const recipe = await RecipeModel.findById(req.body.recipeID);
@@ -52,13 +53,13 @@ router.get("/savedRecipies/ids/:userID", async(req,res)=>{
     }
 });
 
-router.get("/savedRecipies", async(req,res)=>{
+router.get("/savedRecipies/:userID", async(req,res)=>{
     try{
-        const user = await UserModel.findById(req.body.userID);
+        const user = await UserModel.findById(req.params.userID);
         const savedRecipies = await RecipeModel.find({
             _id:{$in: user.savedRecipies}
         });
-        res.json({savedRecipies:user.savedRecipies});
+        res.json({savedRecipies});
     }
     catch(err){
         res.json(err);
